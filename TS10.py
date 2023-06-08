@@ -1,7 +1,47 @@
 import time
+import random
 
 print("=== CHƯƠNG TRÌNH TÍNH ĐIỂM CHUẨN ĐẬU VÀO TRƯỜNG CẤP 3 ===\n")
 time.sleep(1)
+
+# đăng nhập
+print(" === VUI LÒNG ĐĂNG NHẬP === ")
+def generate_captcha():
+    # Generate a random string of letters and digits
+    captcha = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=7))
+    
+    # Display the CAPTCHA and ask the user to enter it
+    print('Hãy nhập theo CAPTCHA sau đây: ' + captcha)
+    user_input = input('Nhập nó ở đây -->: ')
+    
+    # Check if the user entered the correct CAPTCHA
+    if user_input == captcha:
+        print('Duyệt thành công CAPTCHA')
+        return True
+    else:
+        print('Duyệt không thành công CAPTCHA')
+        return False
+
+def login():
+    # Ask the user for their username and password
+    username = input('Nhập tên tài khoản: ')
+    password = input('Nhập mật khẩu tài khoản: ')
+    
+    # Verify the CAPTCHA
+    while not generate_captcha():
+        pass
+    
+    # Verify the username and password
+    if username == 'student1' and password == 'password1':
+        print('Đăng nhập thành công')
+    else:
+        print('Đăng nhập không thành công')
+
+login()
+
+print("Chúc tôi đang xác minh thông tin của bạn một lần nữa...")
+time.sleep(5)
+print("="*50)
 
 # Nhập thông tin thí sinh
 print(" === Vui lòng nhập thông tin thí sinh === ")
@@ -11,6 +51,7 @@ tinh_thanh = input("Nhập tỉnh/ Thành phố: ")
 truong_du_thi = input("Nhập tên trường dự thi: ")
 phong_du_thi = input("Nhập số phòng dự thi: ")
 
+print("="*50)
 print("\n=== ĐIỂM MÔN THƯỜNG ===")
 # Nhập điểm các môn học
 print(" === Vui lòng nhập điểm từng môn === ")
@@ -34,8 +75,9 @@ if su < 0 or su > 10:
     print("Điểm môn Sử không hợp lệ. Vui lòng nhập lại!")
     su = float(input("Nhập lại điểm môn Sử: "))
 
+print("="*50)
 # Nhập điểm môn chuyên
-print("\n=== ĐIỂM MÔN CHUYÊN ===")
+print("=== ĐIỂM MÔN CHUYÊN ===")
 print("Chọn môn chuyên của bạn:")
 print("1. Toán")
 print("2. Văn")
@@ -56,9 +98,9 @@ diem_mon_chuyen = float(input(f"Nhập điểm môn {ten_mon_chuyen}: "))
 
 # Tính tổng điểm
 tong_diem = toan + van + anh + su + diem_mon_chuyen
-
+print("="*50)
 # Nhập thông tin nguyện vọng
-print("\n=== NGUYỆN VỌNG VÀ ĐIỂM CHUẨN ===")
+print("=== NGUYỆN VỌNG VÀ ĐIỂM CHUẨN ===")
 nguyen_vong = []
 for i in range(3):
     ten_nv = input(f"Nhập tên trường nguyện vọng {i+1}: ")
@@ -66,8 +108,12 @@ for i in range(3):
     print("="*25)
     nguyen_vong.append({"ten": ten_nv, "diem_chuan": diem_chuan_nv})
 
+print("Chúng tôi đang chuẩn bị kết quả cho bạn")
+time.sleep(3)
+print("xin hãy chờ một chút...")
+time.sleep(5)
 # Hiển thị kết quả
-print("\n=== KẾT QUẢ THI ===")
+print("\n=== THÔNG TIN - KẾT QUẢ THI ===")
 print(f"Số báo danh: {so_bao_danh}")
 print(f"Họ và tên: {ten}")
 print(f"Tỉnh/ Thành phố: {tinh_thanh}")
